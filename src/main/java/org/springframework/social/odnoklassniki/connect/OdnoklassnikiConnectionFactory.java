@@ -24,7 +24,12 @@ import org.springframework.social.odnoklassniki.api.Odnoklassniki;
  */
 public class OdnoklassnikiConnectionFactory extends OAuth2ConnectionFactory<Odnoklassniki> {
 
+	// egarmin: PROVIDER_ID was added for new spring-social version (1.1.4.RELEASE)
+	public static final String PROVIDER_ID = "odnoklassniki";
+
 	public OdnoklassnikiConnectionFactory(String clientId, String clientSecret, String applicationKey) {
-		super("odnoklassniki", new OdnoklassnikiServiceProvider(clientId, clientSecret, applicationKey), new OdnoklassnikiAdapter());
+        // egarmin: PROVIDER_ID was added for new spring-social version (1.1.4.RELEASE)
+		super(PROVIDER_ID, new OdnoklassnikiServiceProvider(clientId, clientSecret, applicationKey), new OdnoklassnikiAdapter());
 	}
+
 }

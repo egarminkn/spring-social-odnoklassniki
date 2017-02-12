@@ -8,11 +8,14 @@ import java.util.TreeMap;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.util.DigestUtils;
 
+// egarmin: PROVIDER_ID was added for new spring-social version (1.1.4.RELEASE)
+import static org.springframework.social.odnoklassniki.connect.OdnoklassnikiConnectionFactory.PROVIDER_ID;
+
 public abstract class AbstractOdnoklassnikiOperations {
 
     private static final String MAILRU_REST_URL = "http://api.odnoklassniki.ru/fb.do?";
 
-    private final SortedMap<String, String> params = new TreeMap<String, String>(new Comparator<String>() {
+    private final SortedMap<String, String> params = new TreeMap<>(new Comparator<String>() {
         @Override
         public int compare(String str, String str2) {
             return str.compareTo(str2);
@@ -38,7 +41,8 @@ public abstract class AbstractOdnoklassnikiOperations {
 
     protected void requireAuthorization() {
         if (!isAuthorized) {
-            throw new MissingAuthorizationException();
+            // egarmin: PROVIDER_ID was added for new spring-social version (1.1.4.RELEASE)
+            throw new MissingAuthorizationException(PROVIDER_ID);
         }
     }
 
